@@ -1,0 +1,14 @@
+.black {
+    display: inline-block;
+    height: 50px;
+    width: 50px;
+    background-color: black;
+    border: 1px solid black;
+}
+.white {
+    display: inline-block;
+    height: 50px;
+    width: 50px;
+    background-color: white;
+    border: 1px solid black;
+}

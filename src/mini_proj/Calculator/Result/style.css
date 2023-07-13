@@ -1,0 +1,25 @@
+.output {
+    font-family: Arial, Helvetica, sans-serif;
+    width: 360px;
+    height: 120px;
+    background-color: #333333;
+    line-height: 100px;
+    padding: 0 15px;
+    margin-bottom: 20px;
+}
+
+.operand{
+    height: 60%;
+    text-align: right;
+    line-height: 72px;
+    font-size: 60px;
+    color: #fff;
+}
+.result{
+    height: 40%;
+    text-align: left;
+    line-height: 48px;
+    color: #ff9f0a;
+    font-size: 40px;
+}
+
