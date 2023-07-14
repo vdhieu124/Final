@@ -48,6 +48,11 @@ function Pomodoro({title}) {
   function startTime(){
     setPaused(false);
   }
+  function handleInput(e){
+    if(e.key === '.'||e.key === ','){
+      e.preventDefault();
+    }
+  }
   return(
     <div className={`container ${status}`}>
       <Title style={{textAlign: 'center', color: '#fff'}}>{title}</Title>
@@ -65,10 +70,12 @@ function Pomodoro({title}) {
             <>
             <Space direction='vertical'>
               <Space>
-                <Text strong>Work:</Text> <Input min={1} type="number" prefix={<HistoryOutlined />} suffix='Seconds' value={workTime} onChange={(e) => setWorkTime(e.target.value)} /> 
+                <Text strong>Work:</Text> 
+                <Input onKeyDown={handleInput} min={1} type="number" prefix={<HistoryOutlined />} suffix='Seconds' value={workTime} onChange={(e) => setWorkTime(e.target.value)} /> 
               </Space>
               <Space>
-                <Text strong>Relax:</Text> <Input min={1} type="number" prefix={<HistoryOutlined />} suffix='Seconds' value={relaxTime} onChange={(e) => setRelaxTime(e.target.value)} />
+                <Text strong>Relax:</Text> 
+                <Input onKeyDown={handleInput} min={1} type="number" prefix={<HistoryOutlined />} suffix='Seconds' value={relaxTime} onChange={(e) => setRelaxTime(e.target.value)} />
               </Space>
               <Button onClick={paused?startTime:pauseTime}>{paused?'Continue':'Pause'}</Button>
             </Space>

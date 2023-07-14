@@ -1,9 +1,10 @@
-import { Button, Card, Carousel, Spin } from "antd";
+import { Button, Card, Carousel, Spin, notification } from "antd";
 import { useEffect, useState } from "react"
 import './index.css'
 
 function Quotes(){
     const [quotes, setQuotes] = useState([]);
+    const [error, setError] = useState(null)
     const styleButton = {
         left:'50%',
         top:50, 
@@ -21,13 +22,25 @@ function Quotes(){
     }
 
     async function getQuotes(){
-        const response = await fetch("http://localhost:3000/quotes", {
-            method: 'POST',
-            headers: {'Content-Type':'application/json'},
-            body: JSON.stringify({num: 3}),
-        });
-        const data = await response.json();
-        setQuotes(data);
+        try {
+            const response = await fetch("http://localhost:3000/quotes", {
+                method: 'POST',
+                headers: {'Content-Type':'application/json'},
+                body: JSON.stringify({num: 3}),
+            });
+            if (!response.ok){
+                throw new Error('Cannot fetch API data!')
+            }
+            const data = await response.json();
+            setQuotes(data);
+        } catch (error) {
+            setError(error.message);
+            notification.error({
+                message: 'Error',
+                description: 'Cannot fetch API data!',
+                placement:'top'
+            });
+        }       
     }
     useEffect(() => {
         getQuotes()
@@ -35,7 +48,7 @@ function Quotes(){
     return(
         <>
             <div className="quotes">
-                {quotes.length === 0?
+                {error?
                     (<Carousel dots={false} style={styleCarousel} autoplay>
                         <Card><Spin size="large" style={styleDefault}></Spin></Card>
                         <Card><Spin size="large" style={styleDefault}></Spin></Card>

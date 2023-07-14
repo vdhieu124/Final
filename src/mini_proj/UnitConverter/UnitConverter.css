@@ -1,6 +1,7 @@
 .unit-convert{
-    width: fit-content;
-    margin-left: 50px;
+    /* width: fit-content; */
+    width: 20%;
+    margin: auto;
     border: 1px solid #000;
     padding: 20px;
     border-radius: 10px;

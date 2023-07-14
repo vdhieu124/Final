@@ -37,6 +37,11 @@ function Input({title}){
     function handleShow(){
         setShowSetting(!showSetting);
     }
+    function handleInput(e){
+        if(e.key === '.'||e.key === ','){
+          e.preventDefault();
+        }
+    }
     return (
         <>
             <Title style={{margin:15}}>{title}</Title>
@@ -46,7 +51,7 @@ function Input({title}){
                 </Space>
                 {showSetting? 
                     <Space size='large' style={styleSpace}>
-                        <AntInput type="number" min={1} max={25} value={value} onChange={getSize}/> 
+                        <AntInput onKeyDown={handleInput} type="number" min={1} max={25} value={value} onChange={getSize}/> 
                         <ColorPicker value={color2} onChange={getColor2}/>
                         <ColorPicker value={color1} onChange={getColor1}/>
                     </Space>

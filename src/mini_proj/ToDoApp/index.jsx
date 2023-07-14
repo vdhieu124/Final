@@ -2,13 +2,13 @@ import './index.css'
 import { Input, Typography, Button, Space, Card, notification } from "antd";
 import { DeleteOutlined,EditOutlined } from "@ant-design/icons";
 import { useState } from "react";
-const {Title} = Typography;
+const {Title, Text} = Typography;
 
 // eslint-disable-next-line react/prop-types
 function Todoapp({background, title}){
     const [newJob, setNewJob] = useState("");
     const [jobs, setJobs] = useState([]);
-    const textColor ={color: '#fff'}
+    const textColor ={color: '#fff'};
 
     const [api, contextHolder] = notification.useNotification();
     const errorNotification = () => {
@@ -16,6 +16,7 @@ function Todoapp({background, title}){
         message: 'Error',
         description:
             "Let's add new job!",
+        placement:'top'
         });
     };
     const successNotification = () => {
@@ -23,6 +24,7 @@ function Todoapp({background, title}){
         message: 'Success',
         description:
             "Add new job successful!",
+        placement:'top'
         });
     };
     const infoNotification = () => {
@@ -30,6 +32,7 @@ function Todoapp({background, title}){
         message: 'Notification',
         description:
             "Delete job successful!",
+        placement:'top'
         });
     };
     function addJob(){
@@ -37,13 +40,17 @@ function Todoapp({background, title}){
             errorNotification();
             return;
         }
+        const now = new Date();
+        const currentTime = now.toLocaleTimeString();
         const job = {
             id: Math.floor(Math.random() *1000),
-            value: newJob
+            value: newJob,
+            time: currentTime
         };
         setJobs(oldJobs => [...oldJobs,job]);
         setNewJob("");
         successNotification();
+        
     }
     function delJob(id){
         const newArr = jobs.filter(job => job.id !== id);
@@ -67,15 +74,19 @@ function Todoapp({background, title}){
                 <div className='result'>
                     {jobs.map((job) => {
                         return(
-                            <Card key={job.id} style={{height: '20%', marginBottom:5, overflow: 'hidden'}}>
-                                <Space style={{
+                            <Card key={job.id} style={{height: '25%', marginBottom:5, overflow: 'hidden'}}>
+                                <Space style={{ 
                                     display: 'flex',
                                     justifyContent: 'space-between',
-                                    alignItems: 'baseline',
-                                    padding: '5px 20px'
-                                    }}>
-                                    <Title level={4}>{job.value}</Title>
-                                    <Button style={{fontSize: '22px', color: `${background}`}} type='link' onClick={()=>delJob(job.id)}><DeleteOutlined /></Button>
+                                    padding: '5px 10px'
+                                }}>
+                                    <Space size={0} direction='vertical'>
+                                        <Title level={4}>{job.value}</Title>
+                                        <Text italic>Created at {job.time}</Text>
+                                    </Space>
+                                    <Space style={{verticalAlign: 'super'}}>
+                                        <Button style={{fontSize: '22px', color: `${background}`}} type='link' onClick={()=>delJob(job.id)}><DeleteOutlined /></Button>
+                                    </Space>
                                 </Space>
                             </Card>
                         )

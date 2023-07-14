@@ -34,13 +34,13 @@ function UnitConverter({title}) {
             <Text strong style={{display: 'block',width:40}}>
               {mode? "VND: " : "USD: "}
             </Text>
-            <Input style={{width: '200px'}} type="number" value={mode? vnd:usd} onChange={mode? toUsd:toVnd} suffix={mode? 'vnđ' : '$'}/>
+            <Input style={{width: '250px'}} type="number" value={mode? vnd:usd} onChange={mode? toUsd:toVnd} suffix={mode? 'vnđ' : '$'}/>
           </Space>
           <Space size='large'>
             <Text strong style={{display: 'block',width:40}}>
               {mode? "USD: " : "VND: "}
             </Text>
-            <Input style={{width: '200px'}} type="number" value={mode? usd:vnd} readOnly suffix={mode? '$' : 'vnđ'}/>
+            <Input style={{width: '250px'}} type="number" value={mode? usd:vnd} readOnly suffix={mode? '$' : 'vnđ'}/>
           </Space>
           <Space><Button onClick={changeMode}>{mode? 'Change USD → VND':'Change VND → USD'}</Button></Space>
         </Space>

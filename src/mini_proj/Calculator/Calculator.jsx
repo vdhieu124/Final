@@ -2,7 +2,7 @@ import Button from './Button/index'
 import Result from './Result'
 import './Calculator.css'
 import { useState } from 'react'
-import { Typography } from 'antd'
+import { Typography, notification } from 'antd'
 const {Title} = Typography
 
 let operands = [];
@@ -94,7 +94,12 @@ function Calculator({title}) {
                     if(operands[1] != 0){
                         return operands[0] / operands[1];
                     } else{
-                        return operands[1];
+                        notification.error({
+                            message: 'Error: Cannot divide by zero!',
+                            description: 'Please press C to reset calculator!',
+                            placement: 'top',
+                        })
+                        return 'Lỗi';
                     }
             }
         }
